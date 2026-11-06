@@ -191,4 +191,77 @@
       probe.src = webp;
     });
   }
-})( );
+
+  /* ---------- 11. 分享本页 ---------- */
+  var shareBtn = document.getElementById("shareBtn");
+  var toastEl = document.getElementById("toast");
+  var toastTimer = null;
+
+  function toast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 2400);
+  }
+
+  function currentLang() {
+    return document.documentElement.getAttribute("data-lang") === "en" ? "en" : "zh";
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+    // 非安全上下文（http / file://）下的兜底
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "-1000px";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      if (ok) { resolve(); } else { reject(new Error("copy failed")); }
+    });
+  }
+
+  if (shareBtn) {
+    shareBtn.addEventListener("click", function () {
+      var en = currentLang() === "en";
+      var url = location.href.split("#")[0];
+      var data = {
+        title: en ? "HanShu — RPG Creation IDE & Mod Engine" : "HanShu 汉书 · RPG 创作 IDE 与 Mod 运行引擎",
+        text: en ? "A Minecraft storytelling & RPG toolkit: a creation IDE plus a mod engine." : "Minecraft 剧情 / RPG 内容创作工具链：创作 IDE + Mod 运行引擎。",
+        url: url
+      };
+      var done = function () {
+        shareBtn.classList.add("is-done");
+        setTimeout(function () { shareBtn.classList.remove("is-done"); }, 1600);
+      };
+      var copyAndTell = function () {
+        copyText(url).then(function () { toast(en ? "Link copied" : "链接已复制"); done(); })
+                        .catch(function () { toast(en ? "Copy failed — copy the address bar" : "复制失败，请手动复制地址栏"); });
+      };
+
+      if (navigator.share) {
+        try {
+          navigator.share(data).then(done).catch(function (err) {
+            // 用户主动取消不算失败；其他错误才回退到复制
+            if (err && err.name === "AbortError") return;
+            copyAndTell();
+          });
+        } catch (e) {
+          // 同步抛错（例如非安全上下文）也要回退
+          if (e && e.name === "AbortError") return;
+          copyAndTell();
+        }
+      } else {
+        copyAndTell();
+      }
+    });
+  }
+})();
