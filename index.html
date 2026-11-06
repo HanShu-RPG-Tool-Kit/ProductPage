@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HanShu 汉书 · RPG 创作 IDE 与 Mod 运行引擎</title>
+  <meta name="description" content="HanShu（汉书）是一套 Minecraft 剧情 / RPG 内容创作工具链：带多人协作的创作 IDE（WebUI），以及 NeoForge 模组运行引擎（HanShu RPG Tool Kit）。剧本、任务、对话、商店、区域演出，从这里写，到游戏里跑。" />
+  <meta name="theme-color" content="#12100f" />
+  <meta name="color-scheme" content="dark" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="apple-touch-icon" href="./assets/icon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="HanShu 汉书 · RPG 创作 IDE 与 Mod 运行引擎" />
+  <meta property="og:description" content="剧本、任务、对话、商店、区域演出——从一个工程写起，在 Minecraft 里跑起来。" />
+  <meta property="og:image" content="./assets/icon.svg" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <!-- ============ Header ============ -->
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="HanShu 汉书 首页">
+        <img class="icon" src="./assets/icon.svg" alt="" width="30" height="30" />
+        <img class="wordmark" src="./assets/wordmark.svg" alt="HanShu" height="20" />
+      </a>
+      <nav class="nav" id="nav" aria-label="主导航">
+        <a href="#overview"><span data-l="zh">概览</span><span data-l="en">Overview</span></a>
+        <a href="#editor"><span data-l="zh">创作 IDE</span><span data-l="en">Editor</span></a>
+        <a href="#engine"><span data-l="zh">Mod 引擎</span><span data-l="en">Mod Engine</span></a>
+        <a href="#specs"><span data-l="zh">规格</span><span data-l="en">Specs</span></a>
+        <a href="#download"><span data-l="zh">下载</span><span data-l="en">Download</span></a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-toggle" role="group" aria-label="Language / 语言">
+          <button type="button" data-set-lang="zh" aria-pressed="true">中文</button>
+          <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="菜单"><span></span></button>
+        <a class="btn btn--primary btn--sm" href="https://github.com/HanShu-RPG-Tool-Kit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg> GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ Hero ============ -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="badge reveal">
+            <span class="dot" aria-hidden="true"></span>
+            <b>v0.1</b>
+            <span data-l="zh">预览版</span><span data-l="en">Preview</span>
+            <span class="tag">NeoForge 26.1.2</span>
+          </div>
+          <h1 class="reveal" data-d="1">
+            <span data-l="zh">写 RPG 内容的环境，<br />让它在游戏里<span class="hl">跑起来</span></span>
+            <span data-l="en">An IDE for RPG content.<br />An engine to <span class="hl">run it</span>.</span>
+          </h1>
+          <p class="lede reveal" data-d="2">
+            <span data-l="zh"><strong>HanShu 汉书</strong> 是一套 Minecraft 剧情 / RPG 内容创作工具链：带多人协作的<b>创作 IDE</b>，以及把它写下的剧本、任务、对话直接跑进游戏的 <b>Mod 运行引擎</b>。</span>
+            <span data-l="en"><strong>HanShu</strong> is a Minecraft storytelling &amp; RPG toolkit: a collaborative <b>creation IDE</b> plus a <b>mod engine</b> that runs everything you author — scripts, quests, dialogue — inside the game.</span>
+          </p>
+          <div class="btn-row reveal" data-d="3">
+            <a class="btn btn--primary" href="#download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg> <span data-l="zh">开始使用</span><span data-l="en">Get started</span></a>
+            <a class="btn btn--ghost" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg> <span data-l="zh">查看源码</span><span data-l="en">View source</span></a>
+          </div>
+          <div class="hero-meta reveal" data-d="3">
+            <span>Minecraft <b>26.1.2</b></span>
+            <span>Java <b>25</b></span>
+            <span data-l="zh"><b>Web</b> / <b>桌面</b>双端</span>
+            <span data-l="en"><b>Web</b> &amp; <b>desktop</b></span>
+          </div>
+        </div>
+
+        <figure class="mock reveal" data-d="2" aria-label="HanShu 编辑器界面示意">
+          <div class="mock-window">
+            <div class="mock-bar">
+              <div class="mock-dots"><i></i><i></i><i></i></div>
+              <div class="mock-url">hanshu://project/rainy-night · <span data-l="zh">剧本编辑器</span><span data-l="en">script editor</span></div>
+            </div>
+            <div class="mock-body">
+              <div class="mock-side">
+                <span class="on"><span data-l="zh">剧本</span><span data-l="en">Script</span></span><span data-l="zh">任务</span><span data-l="en">Quest</span><span data-l="zh">地图</span><span data-l="en">Level</span><span data-l="zh">物品</span><span data-l="en">Item</span><span data-l="zh">礼包</span><span data-l="en">Kit</span><span data-l="zh">商店</span><span data-l="en">Shop</span><span data-l="zh">演员</span><span data-l="en">Actor</span>
+              </div>
+              <div class="mock-code" aria-hidden="true">
+                <div class="code-line"><span class="ln">1</span><span><span class="tok-c">// 新雨夜 · 第 3 幕</span></span></div>
+                <div class="code-line"><span class="ln">2</span><span><span class="tok-k">@角色</span> <span class="tok-id">阿岚</span> <span class="tok-s">"镇口的守夜人"</span></span></div>
+                <div class="code-line"><span class="ln">3</span><span>&nbsp;</span></div>
+                <div class="code-line"><span class="ln">4</span><span><span class="tok-k">阿岚</span>: <span class="tok-s">"这雨……下个不停啊。"</span></span></div>
+                <div class="code-line"><span class="ln">5</span><span><span class="tok-k">等待</span> <span class="tok-id">玩家</span> <span class="tok-k">选择</span> {</span></div>
+                <div class="code-line"><span class="ln">6</span><span>&nbsp;&nbsp;<span class="tok-s">"陪你等"</span> → <span class="tok-id">信任</span> <span class="tok-k">+</span><span class="tok-n">1</span></span></div>
+                <div class="code-line"><span class="ln">7</span><span>&nbsp;&nbsp;<span class="tok-s">"我得走了"</span> → <span class="tok-id">离开</span> <span class="caret"></span></span></div>
+                <div class="code-line"><span class="ln">8</span><span>}</span></div>
+              </div>
+              <div class="mock-tree" aria-hidden="true">
+                <div class="t-h"><span data-l="zh">工程文件</span><span data-l="en">Project</span></div>
+                <div class="t">rainy-night.hs</div>
+                <div class="t">alan.char</div>
+                <div class="t">guard.quest</div>
+                <div class="t">village.level</div>
+                <div class="t">shop.day.item</div>
+                <div class="t">gift.kit</div>
+              </div>
+            </div>
+            <div class="mock-status">
+              <span class="ok">● <span data-l="zh">服务已连接</span><span data-l="en">server connected</span></span>
+              <span>main</span>
+              <span data-l="zh">已保存 · 12:04</span><span data-l="en">Saved · 12:04</span>
+            </div>
+          </div>
+          <div class="float-card" aria-hidden="true">
+            <div class="avatars"><i>禾</i><i>M</i><i>J</i></div>
+            <div class="f-label">
+              <b data-l="zh">3 人在线</b><b data-l="en">3 collaborating</b>
+              <span data-l="zh">正在编辑 rainy-night.hs</span><span data-l="en">editing rainy-night.hs</span>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ Tech strip ============ -->
+    <div class="strip">
+      <div class="wrap strip-inner">
+        <span class="strip-label"><span data-l="zh">技术底座</span><span data-l="en">Built on</span></span>
+        <div class="chips">
+          <span class="chip">NeoForge <b>26.1.2</b></span>
+          <span class="chip">Java <b>25</b></span>
+          <span class="chip">React <b>+ TypeScript</b></span>
+          <span class="chip">Tauri <b>2</b></span>
+          <span class="chip">Rust <b>project-server</b></span>
+          <span class="chip">Monaco <b>Editor</b></span>
+          <span class="chip">React <b>Flow</b></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Overview ============ -->
+    <section class="section" id="overview">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Overview</span>
+          <h2>
+            <span data-l="zh">一个工程，<em>两端</em>，同一份内容</span>
+            <span data-l="en">One project. <em>Two ends.</em> One source of truth.</span>
+          </h2>
+          <p>
+            <span data-l="zh">编辑器负责“写下来”，引擎负责“跑起来”。它们通过自有文件格式与工程协作服务对接，从剧本到游戏里的一帧画面，中间不需要导出脚本、手改 JSON。</span>
+            <span data-l="en">The IDE writes it down; the engine runs it. They meet through a set of project formats and the collaboration service — no hand-written JSON, no export scripts between script and scene.</span>
+          </p>
+        </div>
+
+        <div class="grid grid-2 pillars">
+          <article class="card reveal">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M3 5h18v14H3z"/><path d="M9 5v14M3 9h6"/><path d="m12 12 2 2-2 2M17 12l-2 2 2 2"/></svg></div>
+            <div class="kicker">HanShuWebUI</div>
+            <h3><span data-l="zh">创作 IDE</span><span data-l="en">The creation IDE</span></h3>
+            <p>
+              <span data-l="zh">React + Tauri 的工程级编辑器：剧本、任务、流程图、脚本、礼包、物品、导航点、语言与音频资产、皮肤库，共用同一套工程服务。</span>
+              <span data-l="en">A project-scale editor built on React &amp; Tauri: scripts, quests, flow graphs, code, kits, items, nav points, language &amp; audio assets and skins share one project service.</span>
+            </p>
+            <ul class="dot-list">
+              <li data-l="zh">文本、节点图、表单编辑在同一窗口</li>
+              <li data-l="en">Text, node graphs and forms in one window</li>
+              <li data-l="zh">C/S 权威边界：所有写入走服务端事务</li>
+              <li data-l="en">C/S authority: every write goes through a server transaction</li>
+              <li data-l="zh">内置文档、活动列表与本地化支持</li>
+              <li data-l="en">Built-in docs, activity feed and i18n</li>
+            </ul>
+            <div class="tags"><span class="scope-tag">Web</span><span class="scope-tag">Desktop</span><span class="scope-tag">LAN</span></div>
+          </article>
+
+          <article class="card reveal" data-d="1">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M7 4h10v3h3v10h-3v3H7v-3H4V7h3z"/><path d="M10 9h4v6h-4z"/><path d="M1 10h3M1 14h3M20 10h3M20 14h3"/></svg></div>
+            <div class="kicker">HanShu RPG Tool Kit · rpgtoolkit</div>
+            <h3><span data-l="zh">Mod 运行引擎</span><span data-l="en">The mod engine</span></h3>
+            <p>
+              <span data-l="zh">NeoForge 模组，负责在游戏里“跑起来”的部分：NPC 与演员、对白、任务、脚本、商店、区域演出、Boss 血条与环境氛围。</span>
+              <span data-l="en">A NeoForge mod that runs the content in game: NPCs &amp; actors, dialogue, quests, scripts, shops, regional sequences, boss bars and ambient effects.</span>
+            </p>
+            <ul class="dot-list">
+              <li data-l="zh">Nashorn 方言内容脚本，回调与类型推断</li>
+              <li data-l="en">Nashorn-dialect content scripts with typed callbacks</li>
+              <li data-l="zh">礼包超参数 / 修饰器 / 表达式标准</li>
+              <li data-l="en">Kit hyper-params, modifiers and expression spec</li>
+              <li data-l="zh">Devtool Server 供编辑端实时联调</li>
+              <li data-l="en">Devtool Server for live editor &harr; game sync</li>
+            </ul>
+            <div class="tags"><span class="scope-tag">NeoForge</span><span class="scope-tag">Java 25</span><span class="scope-tag">PAK</span></div>
+          </article>
+        </div>
+
+        <div class="grid grid-3" style="margin-top:22px">
+          <article class="card reveal">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3.2 3.2 0 0 1 0 6M18 20c0-2.2-.8-4-2-5.3"/></svg></div>
+            <h3><span data-l="zh">多人协作</span><span data-l="en">Collaboration</span></h3>
+            <p data-l="zh">本机宿主保管密钥，页面只拿短期会话；局域网内的协作者登录即可一起改同一个工程。</p>
+            <p data-l="en">The host machine holds the key; pages get short-lived sessions only. Teammates on the LAN log in and edit the same project together.</p>
+          </article>
+          <article class="card reveal" data-d="1">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M4 3h10l6 6v12H4z"/><path d="M14 3v6h6"/><path d="m8 16 2-4 2 4M9 14.5h2M14 12h1.5v4H14z"/></svg></div>
+            <h3><span data-l="zh">自有格式</span><span data-l="en">Project formats</span></h3>
+            <p><code class="mono">.hs</code> <code class="mono">.hsc</code> <code class="mono">.char</code> <code class="mono">.quest</code> <code class="mono">.item</code> <code class="mono">.level</code> <code class="mono">.kit</code><br />
+            <span data-l="zh">版本化、可比较、可回滚。</span><span data-l="en">Versioned, diffable, restorable.</span></p>
+          </article>
+          <article class="card reveal" data-d="2">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13 6l-2 12"/></svg></div>
+            <h3><span data-l="zh">类型化脚本</span><span data-l="en">Typed scripting</span></h3>
+            <p data-l="zh">剧本可编译为类型化 JavaScript，Java 回调与泛型签名由语言服务推断。</p>
+            <p data-l="en">Scripts compile to typed JavaScript; the language service infers Java callbacks and generic signatures.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- ============ Editor ============ -->
+    <section class="section" id="editor">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">HanShuWebUI</span>
+          <h2>
+            <span data-l="zh">不是文本编辑器，是<em>工程 IDE</em></span>
+            <span data-l="en">Not a text editor — a <em>project IDE</em></span>
+          </h2>
+          <p>
+            <span data-l="zh">一个工程承载全部工作区。你可以用文字写剧本，用节点图连任务进度，用表单调物品与礼包——三种编辑方式，落在同一份受版本校验的工程里。</span>
+            <span data-l="en">One project holds every workspace. Write scripts as text, wire quest progress as node graphs, tune items and kits through forms — three editing modes over the same version-checked project.</span>
+          </p>
+        </div>
+
+        <div class="split">
+          <div class="reveal">
+            <h3><span data-l="zh">一个窗口，四个工作区</span><span data-l="en">One window, four workspaces</span></h3>
+            <p>
+              <span data-l="zh">顶栏切换「剧本编辑器 / 游戏性 / 视听效果 / 皮肤管理器」，所在工程始终不变。</span>
+              <span data-l="en">Switch between Script, Gameplay, Audiovisual and Skins from the top bar — the open project stays the same.</span>
+            </p>
+            <ul class="check-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><b data-l="zh">剧本编辑器 · </b><b data-l="en">Script editor · </b><span data-l="zh">撰写 <code class="mono">.hs</code> / <code class="mono">.char</code>，管理配音等剧本类资料。</span><span data-l="en">author <code class="mono">.hs</code> / <code class="mono">.char</code> and manage voice assets.</span></span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><b data-l="zh">游戏性 · </b><b data-l="en">Gameplay · </b><span data-l="zh">任务、地图、物品、礼包、商店、演员及专属脚本。</span><span data-l="en">quests, maps, items, kits, shops, actors and their scripts.</span></span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><b data-l="zh">视听效果 · </b><b data-l="en">Audiovisual · </b><span data-l="zh">Boss 血条及界面 / 人物 / 场景 / 音频等表现类分类。</span><span data-l="en">boss bars plus UI, character, scene and audio categories.</span></span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><b data-l="zh">皮肤管理器 · </b><b data-l="en">Skin manager · </b><span data-l="zh">Minecraft 皮肤编辑与实时 3D 预览。</span><span data-l="en">Minecraft skin editing with live 3D preview.</span></span></li>
+            </ul>
+          </div>
+
+          <div class="panel reveal" data-d="1">
+            <div class="panel-head"><span class="lights"><i></i><i></i><i></i></span>rainy-night.hs</div>
+            <div class="panel-body">
+              <div class="tabs" role="tablist" aria-label="编辑器示例">
+                <button type="button" role="tab" aria-selected="true" data-tab="script" data-tabgroup="demo1"><span data-l="zh">剧本</span><span data-l="en">Script</span></button>
+                <button type="button" role="tab" aria-selected="false" data-tab="quest" data-tabgroup="demo1"><span data-l="zh">任务</span><span data-l="en">Quest</span></button>
+                <button type="button" role="tab" aria-selected="false" data-tab="kit" data-tabgroup="demo1"><span data-l="zh">礼包</span><span data-l="en">Kit</span></button>
+              </div>
+              <div class="tab-panel" data-panel="script" data-tabgroup="demo1">
+<pre class="code"><span class="c">// 镇口 · 守夜人阿岚</span>
+<span class="k">@角色</span> <span class="id">阿岚</span> <span class="s">"镇口的守夜人"</span>
+
+<span class="k">场景</span> <span class="id">镇口</span> {
+  <span class="id">阿岚</span>: <span class="s">"这雨……下个不停啊。"</span>
+  <span class="k">等待</span> <span class="id">玩家</span> {
+    <span class="k">选</span> <span class="s">"陪你等"</span> → <span class="id">信任</span> <span class="k">+</span><span class="n">1</span> → <span class="k">继续</span>
+    <span class="k">选</span> <span class="s">"我得走了"</span> → <span class="k">结束</span>
+  }
+  <span class="id">阿岚</span>: <span class="s">"……谢了。"</span>
+}</pre>
+              </div>
+              <div class="tab-panel" data-panel="quest" data-tabgroup="demo1" hidden>
+<pre class="code"><span class="c"># 任务：镇口的雨</span>
+<span class="k">quest</span> <span class="id">rainy_night</span>
+  <span class="k">title</span>: <span class="s">"镇口的雨"</span>
+  <span class="k">progress</span>:
+    - <span class="id">talk_alan</span>   <span class="c"># 与阿岚对话</span>
+    - <span class="id">find_lamp</span>  <span class="c"># 找回灯笼</span>
+  <span class="k">goal</span>:
+    <span class="k">item</span>.has(<span class="s">"lantern"</span>) <span class="k">&amp;&amp;</span>
+    <span class="id">rep</span>.trust <span class="k">&gt;=</span> <span class="n">10</span></pre>
+              </div>
+              <div class="tab-panel" data-panel="kit" data-tabgroup="demo1" hidden>
+<pre class="code"><span class="c"># 礼包：随人数与难度缩放</span>
+<span class="k">kit</span> <span class="id">boss_reward</span> {
+  <span class="k">hyper</span>: { <span class="k">players</span>: <span class="n">1..4</span>, <span class="k">difficulty</span>: <span class="s">"hard"</span> }
+  <span class="k">expr</span>:  <span class="id">count</span> <span class="k">*</span> <span class="id">players</span> <span class="k">*</span> <span class="k">mod</span>.<span class="id">hard</span>
+  <span class="k">give</span>:  <span class="id">emerald</span> <span class="k">x</span> <span class="id">expr</span>
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="split reverse">
+          <div class="reveal">
+            <h3><span data-l="zh">写入只有一个入口</span><span data-l="en">One way to write</span></h3>
+            <p>
+              <span data-l="zh">客户端只保存窗口草稿与缓存，不持有工程目录的写句柄；Rust 服务端持有目录，所有修改都经过<strong>主体权限 + 写权 + 版本校验</strong>。多人同时改同一字段时，冲突会被明确拦住，而不是悄悄互相覆盖。</span>
+              <span data-l="en">The client keeps only drafts and caches — never a filesystem write handle. The Rust server owns the directory; every change passes <strong>identity + write lock + version check</strong>. Two people editing the same field get a clear conflict instead of silent overwrites.</span>
+            </p>
+            <ul class="check-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><span data-l="zh">不做旁路写入，包括皮肤 IPC 路径</span><span data-l="en">No side-channel writes — including the skin IPC path</span></span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><span data-l="zh"><code class="mono">.quest</code> 表单按操作自动提交：文字输入合并，开关与目标增删即时提交</span><span data-l="en"><code class="mono">.quest</code> forms auto-commit per action: typing coalesced, toggles and goal edits immediate</span></span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><span data-l="zh">撤销 / 重做引用服务端原操作回执，保留他人不相关的修改</span><span data-l="en">Undo/redo reference server receipts, preserving others' unrelated edits</span></span></li>
+            </ul>
+          </div>
+
+          <div class="panel reveal" data-d="1">
+            <div class="panel-head"><span class="lights"><i></i><i></i><i></i></span><span data-l="zh">工程历史 · 协作</span><span data-l="en">Project history · collaborators</span></div>
+            <div class="panel-body">
+              <div class="tabs" role="tablist" aria-label="工程历史示例">
+                <button type="button" role="tab" aria-selected="true" data-tab="hist" data-tabgroup="demo2"><span data-l="zh">历史</span><span data-l="en">History</span></button>
+                <button type="button" role="tab" aria-selected="false" data-tab="members" data-tabgroup="demo2"><span data-l="zh">成员</span><span data-l="en">Members</span></button>
+              </div>
+              <div class="tab-panel" data-panel="hist" data-tabgroup="demo2">
+                <ul class="hist">
+                  <li class="now"><span data-l="zh">阿岚台词 · 第 3 幕改写</span><span data-l="en">Alan dialogue, act 3 rewrite</span><span class="t">12:04</span></li>
+                  <li><span data-l="zh">雨夜任务 · 新增进度节点</span><span data-l="en">Rainy-night quest: new progress node</span><span class="t">11:42</span></li>
+                  <li><span data-l="zh">礼包 boss_reward · 调整缩放</span><span data-l="en">Kit boss_reward: scaling tuned</span><span class="t">11:20</span></li>
+                  <li><span data-l="zh">命名版本 v0.1-preview</span><span data-l="en">Named version v0.1-preview</span><span class="t">10:02</span></li>
+                </ul>
+              </div>
+              <div class="tab-panel" data-panel="members" data-tabgroup="demo2" hidden>
+                <div class="collab-mock">
+                  <div class="collab-row"><span class="av" style="background:#ffb247">禾</span><div class="who"><b>禾穗</b><span><span data-l="zh">本机宿主 · Admin</span><span data-l="en">local host · Admin</span></span></div><span class="perm edit"><span data-l="zh">编辑</span><span data-l="en">Edit</span></span></div>
+                  <div class="collab-row"><span class="av" style="background:#8fd0b0">M</span><div class="who"><b>Mira</b><span>192.168.1.24 · <span data-l="zh">正在编辑剧本</span><span data-l="en">editing script</span></span></div><span class="perm edit"><span data-l="zh">编辑</span><span data-l="en">Edit</span></span></div>
+                  <div class="collab-row"><span class="av" style="background:#c7b6f0">J</span><div class="who"><b>Juno</b><span>192.168.1.31 · <span data-l="zh">只读</span><span data-l="en">read-only</span></span></div><span class="perm view"><span data-l="zh">查看</span><span data-l="en">View</span></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Engine ============ -->
+    <section class="section" id="engine">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">HanShu RPG Tool Kit</span>
+          <h2>
+            <span data-l="zh">你写下的一切，在游戏里<em>确实会发生</em></span>
+            <span data-l="en">What you write <em>actually happens</em> in game</span>
+          </h2>
+          <p>
+            <span data-l="zh">NeoForge 模组 <code class="mono">rpgtoolkit</code> 是运行时本体：把 NPC、对白、任务、脚本、商店、区域演出等模块组合成一条完整的内容管线。</span>
+            <span data-l="en">The NeoForge mod <code class="mono">rpgtoolkit</code> is the runtime itself, composing NPCs, dialogue, quests, scripts, shops and regional sequences into one content pipeline.</span>
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card reveal">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M12 3 4 7v6l8 8 8-8V7z"/><circle cx="12" cy="11" r="3"/></svg></div>
+            <h3><span data-l="zh">演员与对白</span><span data-l="en">Actors &amp; dialogue</span></h3>
+            <p data-l="zh">NPC / Actor 模板与脚本、对白与自白；实体模板库支持预览与串流。</p>
+            <p data-l="en">NPC/Actor templates and scripts, dialogue and soliloquy; an entity template library with preview and streaming.</p>
+          </article>
+          <article class="card reveal" data-d="1">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
+            <h3><span data-l="zh">任务与进度</span><span data-l="en">Quests &amp; progress</span></h3>
+            <p data-l="zh">任务（<code class="mono">.quest</code>）与独立 Goal 条件运行时：进度跟踪无世界副作用，副作用只发生在发放。</p>
+            <p data-l="en">Quests (<code class="mono">.quest</code>) and the standalone Goal runtime: tracking is side-effect free; effects happen only on delivery.</p>
+          </article>
+          <article class="card reveal" data-d="2">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M12 3 2 8l10 5 10-5z"/><path d="m2 13 10 5 10-5"/><path d="M18 11v6"/><circle cx="18" cy="19" r="1.6"/></svg></div>
+            <h3><span data-l="zh">内容脚本</span><span data-l="en">Content scripts</span></h3>
+            <p data-l="zh">Nashorn 方言 JavaScript 脚本，可直接调用 Java 侧 API，编辑器提供诊断与补全。</p>
+            <p data-l="en">Nashorn-dialect JavaScript with direct Java APIs, plus diagnostics and completion in the editor.</p>
+          </article>
+          <article class="card reveal">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M4 8h16l-1.5 12h-13z"/><path d="M9 8V5.5a3 3 0 0 1 6 0V8"/></svg></div>
+            <h3><span data-l="zh">经济与声誉</span><span data-l="en">Economy &amp; reputation</span></h3>
+            <p data-l="zh">NPC 商店、玩家仓库、声誉与阵营，让选择产生长期后果。</p>
+            <p data-l="en">NPC shops, player vaults, reputation and factions — choices with long-term consequences.</p>
+          </article>
+          <article class="card reveal" data-d="1">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5z"/><path d="m3 13 9 5 9-5M3 17.5l9 5 9-5" opacity=".55"/></svg></div>
+            <h3><span data-l="zh">地图与演出</span><span data-l="en">Maps &amp; staging</span></h3>
+            <p data-l="zh">地图模板与导航点、区域驱动的雾 / 天空 / 后处理、区域与覆盖音乐、字幕。</p>
+            <p data-l="en">Level templates and nav points, region-driven fog/sky/post-FX, regional and override music, subtitles.</p>
+          </article>
+          <article class="card reveal" data-d="2">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M2 9h20v6H2z"/><path d="M5 12h9" stroke="#ff8847"/><path d="M12 6V3M6 7.5 4.5 5M18 7.5 19.5 5"/></svg></div>
+            <h3><span data-l="zh">Boss 血条</span><span data-l="en">Boss bars</span></h3>
+            <p data-l="zh">客户端模板 + 服务端变量同步，血条外观与数值解耦。</p>
+            <p data-l="en">Client-side templates with server variable sync: look and numbers, decoupled.</p>
+          </article>
+        </div>
+
+        <div class="split" style="margin-top:clamp(48px,8vw,96px)">
+          <div class="reveal">
+            <h3><span data-l="zh">编辑端直接连游戏</span><span data-l="en">The editor talks to the game</span></h3>
+            <p>
+              <span data-l="zh">Web 端不直接读游戏，而是通过 Devtool Server / Control 通道联调：热重载内容、看游戏内效果、抓运行时诊断，都在同一条链路上。</span>
+              <span data-l="en">The web editor never touches the game directly — it talks through the Devtool Server and Control channel: hot-reload content, inspect in-game results and capture runtime diagnostics on one link.</span>
+            </p>
+            <ul class="check-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><b>Devtool Server</b><span data-l="zh">：本机控制面 WebSocket 与帧串流</span><span data-l="en">: local control WebSocket and frame streaming</span></span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><b>PAK</b><span data-l="zh"> 发版协议：编译产物按 client / server / shared 分包</span><span data-l="en"> release protocol: compiled output split into client / server / shared</span></span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><b>IBE</b><span data-l="zh"> 编辑器与受限 Python 插件宿主（宿主 API 2.0.0）</span><span data-l="en"> editor with a restricted Python plugin host (host API 2.0.0)</span></span></li>
+            </ul>
+          </div>
+
+          <div class="panel reveal" data-d="1">
+            <div class="panel-head">
+              <span class="lights"><i></i><i></i><i></i></span>
+              devtool · <span data-l="zh">运行日志</span><span data-l="en">runtime log</span>
+            </div>
+            <div class="panel-body">
+              <div class="console" id="console" aria-live="off">
+                <div class="l"><span class="br">&gt;</span> devtool server listening on 127.0.0.1:23171</div>
+                <div class="l"><span class="ok">&#10003;</span> project attached · rainy-night</div>
+                <div class="l">pak build &rarr; client 3 files · server 5 · shared 2</div>
+                <div class="l"><span class="ok">&#10003;</span> assets verified (hash match)</div>
+                <div class="l">hot reload · 6 modules updated</div>
+                <div class="l">quest rainy_night · goal satisfied</div>
+                <div class="l"><span class="ok">&#10003;</span> deliver &rarr; boss_reward (expr = 12)</div>
+              </div>
+              <button class="replay" type="button" id="replay"><span data-l="zh">&#8635; 重放</span><span data-l="en">&#8635; Replay</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Collaboration & formats ============ -->
+    <section class="section" id="collab">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Collaboration · Formats</span>
+          <h2>
+            <span data-l="zh">团队一起写，<em>版本说了算</em></span>
+            <span data-l="en">Team editing, <em>versioned by default</em></span>
+          </h2>
+          <p>
+            <span data-l="zh">所有资源接入同一个工程服务：同一份历史、同一套权限。每笔有效事务立即归档，可命名版本、比较文件、恢复单资源或整个工程。</span>
+            <span data-l="en">Every resource rides the same project service: one history, one permission model. Each valid transaction is archived at once — name versions, diff files, restore a resource or the whole project.</span>
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card reveal">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3.2 3.2 0 0 1 0 6M18 20c0-2.2-.8-4-2-5.3"/></svg></div>
+            <h3><span data-l="zh">局域网协作</span><span data-l="en">LAN collaboration</span></h3>
+            <p data-l="zh">本机开启共享，复制地址即可邀请；密钥留在宿主，浏览器只拿短期会话，刷新需重登。</p>
+            <p data-l="en">Share from the host and hand out a link; the key stays on the host, browsers hold only short sessions and must log in again after refresh.</p>
+          </article>
+          <article class="card reveal" data-d="1">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
+            <h3><span data-l="zh">命名版本与比较</span><span data-l="en">Named versions &amp; diffs</span></h3>
+            <p data-l="zh">按编辑时段聚合历史，比较文件差异；恢复也走权限与版本校验并生成新版本。</p>
+            <p data-l="en">History aggregates by editing session; compare files. Restoring also passes permission and version checks, then creates a new version.</p>
+          </article>
+          <article class="card reveal" data-d="2">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M4 3h10l6 6v12H4z"/><path d="M14 3v6h6"/><path d="m8 16 2-4 2 4M9 14.5h2M14 12h1.5v4H14z"/></svg></div>
+            <h3><span data-l="zh">安全边界</span><span data-l="en">Security by design</span></h3>
+            <p data-l="zh">密码以 Argon2id 哈希存于服务端；内置 Admin 只能由本机宿主建立会话，远端不可登录、无注册入口。</p>
+            <p data-l="en">Passwords are Argon2id-hashed server-side; the built-in Admin session can only be created by the local host — no remote login, no sign-up.</p>
+          </article>
+        </div>
+
+        <div class="formats reveal" aria-label="文件格式">
+          <a class="fmt" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener">.hs <small data-l="zh">剧本</small><small data-l="en">script</small></a>
+          <a class="fmt" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener">.hsc <small data-l="zh">自动机</small><small data-l="en">machine</small></a>
+          <a class="fmt" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener">.char <small data-l="zh">角色卡</small><small data-l="en">character</small></a>
+          <a class="fmt" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener">.quest <small data-l="zh">任务</small><small data-l="en">quest</small></a>
+          <a class="fmt" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener">.item <small data-l="zh">物品</small><small data-l="en">item</small></a>
+          <a class="fmt" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener">.level <small data-l="zh">地图</small><small data-l="en">level</small></a>
+          <a class="fmt" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener">.kit <small data-l="zh">礼包</small><small data-l="en">kit</small></a>
+          <a class="fmt" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener">.tts <small data-l="zh">配音</small><small data-l="en">voice</small></a>
+        </div>
+      </div>
+    </section>
+    <!-- ============ Pipeline ============ -->
+    <section class="section" id="flow">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Workflow</span>
+          <h2>
+            <span data-l="zh">从写一句台词，到玩家听见它</span>
+            <span data-l="en">From one line of dialogue to a player hearing it</span>
+          </h2>
+        </div>
+        <div class="flow">
+          <div class="flow-step reveal"><span class="n">01</span><h3><span data-l="zh">写</span><span data-l="en">Write</span></h3><p data-l="zh">在剧本编辑器里写 <code class="mono">.hs</code>，在游戏性工作区连任务节点。</p><p data-l="en">Author <code class="mono">.hs</code> in the script editor; wire quest nodes in the gameplay workspace.</p></div>
+          <div class="flow-step reveal" data-d="1"><span class="n">02</span><h3><span data-l="zh">存</span><span data-l="en">Commit</span></h3><p data-l="zh">改动经服务端校验写入工程，立即归档进历史。</p><p data-l="en">Changes are validated server-side, written to the project and archived in history.</p></div>
+          <div class="flow-step reveal" data-d="2"><span class="n">03</span><h3><span data-l="zh">发</span><span data-l="en">Package</span></h3><p data-l="zh">导出 PAK，按 client / server / shared 分包并做哈希校验。</p><p data-l="en">Export a PAK, split into client / server / shared and hash-verified.</p></div>
+          <div class="flow-step reveal" data-d="3"><span class="n">04</span><h3><span data-l="zh">跑</span><span data-l="en">Run</span></h3><p data-l="zh">引擎加载内容，对白、任务、演出在游戏里生效。</p><p data-l="en">The engine loads it: dialogue, quests and staging take effect in game.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Specs ============ -->
+    <section class="section" id="specs">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Specifications</span>
+          <h2>
+            <span data-l="zh">已经发布的<em>正式规范</em></span>
+            <span data-l="en">Published <em>specifications</em></span>
+          </h2>
+          <p>
+            <span data-l="zh">协议、语法与契约以文档为准。下表是当前公开的规范与状态；草稿会变，正式版保证兼容。</span>
+            <span data-l="en">Protocols, syntax and contracts are defined by the docs. Below are the public specs and their status; drafts may change, stable ones are guaranteed.</span>
+          </p>
+        </div>
+        <div class="table-wrap reveal">
+          <table>
+            <thead>
+              <tr>
+                <th><span data-l="zh">规范</span><span data-l="en">Spec</span></th>
+                <th><span data-l="zh">说明</span><span data-l="en">Description</span></th>
+                <th><span data-l="zh">状态</span><span data-l="en">Status</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>hanshu.kit.expr V1</td><td><span data-l="zh">礼包表达式标准</span><span data-l="en">Kit expression standard</span></td><td><span class="status stable">stable</span></td></tr>
+              <tr><td>hanshu.kit.runtime V1</td><td><span data-l="zh">引擎发放契约</span><span data-l="en">Engine delivery contract</span></td><td><span class="status draft">draft</span></td></tr>
+              <tr><td>.hs</td><td><span data-l="zh">剧本语法</span><span data-l="en">Script syntax</span></td><td><span class="status stable">stable</span></td></tr>
+              <tr><td>.char</td><td><span data-l="zh">角色卡语法（本地化 / 配音）</span><span data-l="en">Character card syntax (i18n / voice)</span></td><td><span class="status stable">stable</span></td></tr>
+              <tr><td>HSC</td><td><span data-l="zh">抽象汉书自动机执行模型</span><span data-l="en">Abstract HanShu automaton execution model</span></td><td><span class="status stable">stable</span></td></tr>
+              <tr><td>.tts / .ttsservice</td><td><span data-l="zh">配音：服务与方案规范</span><span data-l="en">Voice: service and provider spec</span></td><td><span class="status stable">stable</span></td></tr>
+              <tr><td>IBE host API</td><td><span data-l="zh">受限 Python 插件宿主</span><span data-l="en">Restricted Python plugin host</span></td><td><span class="status stable">2.0.0</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted reveal" style="margin-top:14px;font-size:13px">
+          <span data-l="zh">完整的用户手册与开发规范位于 WebUI 应用内帮助（源码 <code class="mono">src/help/docs/</code>）与模组仓库 <code class="mono">docs/</code>。</span>
+          <span data-l="en">Full user manual and dev docs live in the WebUI built-in help (<code class="mono">src/help/docs/</code>) and the mod repo's <code class="mono">docs/</code>.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ Download ============ -->
+    <section class="section" id="download">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Download</span>
+          <h2>
+            <span data-l="zh">装上两端，<em>开始创作</em></span>
+            <span data-l="en">Install both ends, <em>start creating</em></span>
+          </h2>
+        </div>
+        <div class="dl-grid">
+          <article class="dl-card reveal">
+            <span class="tagline">HANSHUWEBUI · <span data-l="zh">创作 IDE</span><span data-l="en">Creation IDE</span></span>
+            <h3><span data-l="zh">汉书 WebUI</span><span data-l="en">HanShu WebUI</span></h3>
+            <p><span data-l="zh">桌面版免装 Node.js，内置 Rust 协作服务；也可用浏览器访问本机服务。</span><span data-l="en">The desktop build ships without Node.js and embeds the Rust collaboration server; the browser can connect to your local service too.</span></p>
+            <dl class="dl-meta">
+              <div><dt>Platform</dt><dd>Windows · macOS · Linux</dd></div>
+              <div><dt>Runtime</dt><dd>Tauri 2</dd></div>
+              <div><dt><span data-l="zh">版本</span><span data-l="en">Version</span></dt><dd>v0.1 <span class="muted">preview</span></dd></div>
+              <div><dt>License</dt><dd>MIT</dd></div>
+            </dl>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg> <span data-l="zh">前往 Releases</span><span data-l="en">Go to releases</span></a>
+              <a class="btn btn--ghost" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener"><span data-l="zh">源码</span><span data-l="en">Source</span></a>
+            </div>
+            <p class="placeholder-note"><strong>&#9432;</strong><span data-l="zh">安装包按平台命名，通常在仓库 Releases 页面发布；尚未上架时可用源码运行。</span><span data-l="en">Builds are per-platform and published on the repo's Releases page; until then you can run from source.</span></p>
+          </article>
+
+          <article class="dl-card reveal" data-d="1">
+            <span class="tagline">RPGTOOLKIT · <span data-l="zh">运行引擎</span><span data-l="en">Runtime engine</span></span>
+            <h3>HanShu RPG Tool Kit</h3>
+            <p><span data-l="zh">NeoForge 模组，放进客户端 mods 文件夹即可加载你导出的内容 PAK。</span><span data-l="en">A NeoForge mod — drop it into your mods folder to load your exported content PAK.</span></p>
+            <dl class="dl-meta">
+              <div><dt>Minecraft</dt><dd>26.1.2</dd></div>
+              <div><dt>NeoForge</dt><dd>26.1.2.109</dd></div>
+              <div><dt>Java</dt><dd>25</dd></div>
+              <div><dt>License</dt><dd>BUSL 1.1</dd></div>
+            </dl>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="https://github.com/HanShu-RPG-Tool-Kit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg> <span data-l="zh">获取模组</span><span data-l="en">Get the mod</span></a>
+            </div>
+            <p class="placeholder-note"><strong>&#9432;</strong><span data-l="zh">BUSL 1.1：每个版本发布满两年自动转为 MIT；商业用途受限，详见仓库 LICENSE-POLICY。</span><span data-l="en">BUSL 1.1: each release converts to MIT two years after publication; commercial use is restricted — see LICENSE-POLICY.</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section" id="faq">
+      <div class="wrap">
+        <div class="section-head reveal center" style="text-align:center">
+          <span class="eyebrow">FAQ</span>
+          <h2><span data-l="zh">常见问题</span><span data-l="en">Questions</span></h2>
+        </div>
+        <div class="faq">
+          <details class="reveal" open>
+            <summary><span data-l="zh">编辑器需要联网吗？</span><span data-l="en">Does the editor need internet?</span></summary>
+            <div class="a"><span data-l="zh">不需要。本机宿主会同时保管工程目录与协作服务，打开本机工程即可离线创作；共享只走局域网 HTTP，目前不提供公网穿透。</span><span data-l="en">No. Your machine hosts both the project directory and the collaboration server, so you can work offline. Sharing runs over LAN HTTP only — there is no public tunnelling yet.</span></div>
+          </details>
+          <details class="reveal">
+            <summary><span data-l="zh">两个人同时改同一个任务会怎样？</span><span data-l="en">What if two people edit the same quest?</span></summary>
+            <div class="a"><span data-l="zh">服务端会校验被修改字段的原值并短暂取得写权。不同字段可以并行修改；同一字段冲突时会保留你的输入并明确提示，撤销/重做只回滚你自己引用的操作回执。</span><span data-l="en">The server verifies the original values of the fields being changed and briefly takes a write lock. Different fields edit in parallel; a same-field conflict keeps your input and tells you clearly, and undo/redo only references your own receipts.</span></div>
+          </details>
+          <details class="reveal">
+            <summary><span data-l="zh">支持哪些 Minecraft 版本？</span><span data-l="en">Which Minecraft versions?</span></summary>
+            <div class="a"><span data-l="zh">当前基线为 Minecraft <b>26.1.2</b> + NeoForge <b>26.1.2.109</b> + Java <b>25</b>。版本绑定较紧，因为服务端与客户端都需要同时支持内容运行时与 Devtool 通道。</span><span data-l="en">Current baseline: Minecraft <b>26.1.2</b>, NeoForge <b>26.1.2.109</b>, Java <b>25</b>. The version is tightly pinned because both sides must support the content runtime and the Devtool channel.</span></div>
+          </details>
+          <details class="reveal">
+            <summary><span data-l="zh">只做剧情剧本、不装模组可以吗？</span><span data-l="en">Can I only write scripts, without the mod?</span></summary>
+            <div class="a"><span data-l="zh">可以。编辑与工程历史完全独立于游戏运行；但要让对白、任务、演出在游戏里生效，需要安装 <b>HanShu RPG Tool Kit</b> 并加载导出的 PAK。</span><span data-l="en">Yes. Authoring and project history work independently of the game. To make dialogue, quests and staging take effect, install <b>HanShu RPG Tool Kit</b> and load the exported PAK.</span></div>
+          </details>
+          <details class="reveal">
+            <summary><span data-l="zh">可以商用吗？</span><span data-l="en">Can I use it commercially?</span></summary>
+            <div class="a"><span data-l="zh">WebUI 采用 <b>MIT</b>；模组采用 <b>BUSL 1.1</b>——每个版本发布满两年自动转 MIT，未满两年允许复制、修改、分发与非生产使用，商业用途受限。“HanShu”作为项目组合名与商标不随 BUSL 到期开放。</span><span data-l="en">WebUI is <b>MIT</b>; the mod is <b>BUSL 1.1</b> — each release becomes MIT two years after publication. Before that, copying, modifying, distributing and non-production use are allowed; commercial use is restricted. The &ldquo;HanShu&rdquo; name and trademark do not open up when BUSL expires.</span></div>
+          </details>
+          <details class="reveal">
+            <summary><span data-l="zh">我可以写插件吗？</span><span data-l="en">Can I write plugins?</span></summary>
+            <div class="a"><span data-l="zh">可以。IBE 编辑器提供受限的 Python 插件宿主（宿主 API 2.0.0），支持 manifest、能力审批、目录导入、签名 HTTPS 目录、包哈希校验与更新回退。官方随仓库提供了 Curios 饰品编辑器示例。</span><span data-l="en">Yes. The IBE editor offers a restricted Python plugin host (host API 2.0.0) with manifests, capability approval, directory import, signed HTTPS registries, hash verification and update/rollback. An official Curios trinket editor example ships with the repo.</span></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="cta-band reveal">
+          <div>
+            <h2><span data-l="zh">把你的下一段剧情，写进游戏里。</span><span data-l="en">Write your next story into the game.</span></h2>
+            <p><span data-l="zh">从空工程开始，或者直接打开一个本机工程——所有工作区都准备好了。</span><span data-l="en">Start from an empty project, or open a local one — every workspace is ready.</span></p>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg> GitHub</a>
+            <a class="btn btn--ghost" href="#download"><span data-l="zh">下载</span><span data-l="en">Download</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a class="brand" href="#top">
+            <img class="icon" src="./assets/icon.svg" alt="" width="28" height="28" />
+            <img class="wordmark" src="./assets/wordmark.svg" alt="HanShu" height="18" />
+          </a>
+          <p>
+            <span data-l="zh">汉书 · Minecraft 剧情 / RPG 内容创作工具链。编辑器与运行引擎，一套工程打通。</span>
+            <span data-l="en">HanShu · a Minecraft storytelling &amp; RPG content toolkit. One project, from editor to engine.</span>
+          </p>
+        </div>
+        <div class="foot-col">
+          <h4><span data-l="zh">产品</span><span data-l="en">Product</span></h4>
+          <ul>
+            <li><a href="#overview"><span data-l="zh">概览</span><span data-l="en">Overview</span></a></li>
+            <li><a href="#editor">HanShuWebUI</a></li>
+            <li><a href="#engine">RPG Tool Kit</a></li>
+            <li><a href="#specs"><span data-l="zh">规范</span><span data-l="en">Specs</span></a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4><span data-l="zh">资源</span><span data-l="en">Resources</span></h4>
+          <ul>
+            <li><a href="https://github.com/HanShu-RPG-Tool-Kit" target="_blank" rel="noopener">GitHub Organization</a></li>
+            <li><a href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener">HanShuWebUI</a></li>
+            <li><a href="https://github.com/HanShu-RPG-Tool-Kit/ProductPage" target="_blank" rel="noopener">ProductPage</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4><span data-l="zh">许可</span><span data-l="en">License</span></h4>
+          <ul>
+            <li><a href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI/blob/main/LICENSE" target="_blank" rel="noopener">WebUI · MIT</a></li>
+            <li><a href="https://github.com/HanShu-RPG-Tool-Kit" target="_blank" rel="noopener"><span data-l="zh">模组 · BUSL 1.1</span><span data-l="en">Mod · BUSL 1.1</span></a></li>
+            <li><a href="#faq"><span data-l="zh">商用与商标说明</span><span data-l="en">Commercial &amp; trademark</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span id="year">2026</span> HanShu RPG Tool Kit · <span data-l="zh">汉书是项目组合名与商标</span><span data-l="en">HanShu is the portfolio name and trademark</span></span>
+        <span class="mono">static site · github pages</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/main.js" defer></script>
+</body>
+</html>
