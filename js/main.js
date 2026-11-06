@@ -192,8 +192,10 @@
     });
   }
 
-  /* ---------- 11. 分享本页 ---------- */
+  /* ---------- 11. 分享面板 ---------- */
   var shareBtn = document.getElementById("shareBtn");
+  var sharePanel = document.getElementById("sharePanel");
+  var shareUrlField = document.getElementById("shareUrlField");
   var toastEl = document.getElementById("toast");
   var toastTimer = null;
 
@@ -205,63 +207,107 @@
     toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 2400);
   }
 
-  function currentLang() {
-    return document.documentElement.getAttribute("data-lang") === "en" ? "en" : "zh";
+  function isEn() {
+    return document.documentElement.getAttribute("data-lang") === "en";
   }
 
   function copyText(text) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      return navigator.clipboard.writeText(text);
-    }
-    // 非安全上下文（http / file://）下的兜底
     return new Promise(function (resolve, reject) {
-      var ta = document.createElement("textarea");
-      ta.value = text;
-      ta.setAttribute("readonly", "");
-      ta.style.position = "fixed";
-      ta.style.top = "-1000px";
-      document.body.appendChild(ta);
-      ta.select();
-      var ok = false;
-      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
-      document.body.removeChild(ta);
-      if (ok) { resolve(); } else { reject(new Error("copy failed")); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(resolve, function () { legacyCopy(text) ? resolve() : reject(new Error("copy failed")); });
+        return;
+      }
+      legacyCopy(text) ? resolve() : reject(new Error("copy failed"));
     });
   }
 
-  if (shareBtn) {
-    shareBtn.addEventListener("click", function () {
-      var en = currentLang() === "en";
-      var url = location.href.split("#")[0];
-      var data = {
-        title: en ? "HanShu — RPG Creation IDE & Mod Engine" : "HanShu 汉书 · RPG 创作 IDE 与 Mod 运行引擎",
-        text: en ? "A Minecraft storytelling & RPG toolkit: a creation IDE plus a mod engine." : "Minecraft 剧情 / RPG 内容创作工具链：创作 IDE + Mod 运行引擎。",
-        url: url
-      };
-      var done = function () {
-        shareBtn.classList.add("is-done");
-        setTimeout(function () { shareBtn.classList.remove("is-done"); }, 1600);
-      };
-      var copyAndTell = function () {
-        copyText(url).then(function () { toast(en ? "Link copied" : "链接已复制"); done(); })
-                        .catch(function () { toast(en ? "Copy failed — copy the address bar" : "复制失败，请手动复制地址栏"); });
-      };
+  function legacyCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
 
-      if (navigator.share) {
-        try {
-          navigator.share(data).then(done).catch(function (err) {
-            // 用户主动取消不算失败；其他错误才回退到复制
-            if (err && err.name === "AbortError") return;
-            copyAndTell();
-          });
-        } catch (e) {
-          // 同步抛错（例如非安全上下文）也要回退
-          if (e && e.name === "AbortError") return;
-          copyAndTell();
+  function pageUrl() {
+    return location.href.split("#")[0];
+  }
+
+  var SHARE = {
+    qq: function (u, t) {
+      return "https://connect.qq.com/widget/shareqq/index.html?url=" +
+        encodeURIComponent(u) + "&title=" + encodeURIComponent(t) + "&source=HanShu";
+    },
+    weibo: function (u, t) {
+      return "https://service.weibo.com/share/share.php?url=" +
+        encodeURIComponent(u) + "&title=" + encodeURIComponent(t);
+    },
+    bili: function () {
+      return "https://www.bilibili.com/video/BV14maK67EZQ/";
+    }
+  };
+
+  function openSharePanel() {
+    if (!sharePanel) return;
+    if (shareUrlField) shareUrlField.value = pageUrl();
+    sharePanel.hidden = false;
+    shareBtn.setAttribute("aria-expanded", "true");
+  }
+
+  function closeSharePanel() {
+    if (!sharePanel || sharePanel.hidden) return;
+    sharePanel.hidden = true;
+    shareBtn.setAttribute("aria-expanded", "false");
+  }
+
+  if (shareBtn && sharePanel) {
+    shareBtn.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      sharePanel.hidden ? openSharePanel() : closeSharePanel();
+    });
+
+    sharePanel.addEventListener("click", function (ev) { ev.stopPropagation(); });
+
+    document.addEventListener("click", closeSharePanel);
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") closeSharePanel();
+    });
+
+    Array.prototype.forEach.call(sharePanel.querySelectorAll("[data-share]"), function (btn) {
+      btn.addEventListener("click", function () {
+        var kind = btn.getAttribute("data-share");
+        var url = pageUrl();
+        var title = isEn() ? "HanShu — RPG Creation IDE & Mod Engine" : "HanShu 汉书 · RPG 创作 IDE 与 Mod 运行引擎";
+
+        if (kind === "copy") {
+          copyText(url).then(function () { toast(isEn() ? "Link copied" : "链接已复制"); })
+                          .catch(function () { toast(isEn() ? "Copy failed — select the link above" : "复制失败，请手动选中上方链接"); });
+          return;
         }
-      } else {
-        copyAndTell();
-      }
+
+        if (kind === "system") {
+          if (navigator.share) {
+            navigator.share({ title: title, url: url }).catch(function () { /* 取消即忽略 */ });
+            closeSharePanel();
+          } else {
+            copyText(url).then(function () { toast(isEn() ? "Link copied" : "链接已复制（此浏览器无系统分享）"); })
+                            .catch(function () { toast(isEn() ? "Copy failed — select the link above" : "复制失败，请手动选中上方链接"); });
+          }
+          return;
+        }
+
+        var target = SHARE[kind] && SHARE[kind](url, title);
+        if (target) {
+          window.open(target, "_blank", "noopener,noreferrer");
+          closeSharePanel();
+        }
+      });
     });
   }
 })();

@@ -302,6 +302,45 @@ html[data-lang="zh"] .lang-flex[data-l="zh"], html[data-lang="en"] .lang-flex[da
   .brand .wordmark { display: none; }
   .lang-toggle button { padding: 5px 7px; }
 }
+/* ---------- Share panel (floating) ---------- */
+.share-panel {
+  position: absolute; top: calc(100% + 10px); right: var(--gutter); z-index: 60;
+  width: 268px; padding: 14px;
+  background: var(--bg-3); border: 1px solid var(--line-2); border-radius: 12px;
+  box-shadow: var(--shadow), 0 0 0 1px rgba(0,0,0,.35);
+  animation: shareIn .16s var(--ease);
+}
+.share-panel[hidden] { display: none; }
+@keyframes shareIn { from { opacity: 0; transform: translateY(-6px); } }
+.share-title { font-size: 13px; color: var(--fg-mute); font-family: var(--font-mono); letter-spacing: .06em; margin-bottom: 12px; }
+.share-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.share-item {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  width: 100%; padding: 10px 4px; border-radius: 9px;
+  font-size: 12.5px; color: var(--fg-dim); line-height: 1.2;
+  transition: background .15s, color .15s;
+}
+.share-item:hover { background: var(--bg-4); color: var(--fg); }
+.share-item:active { transform: scale(.97); }
+.si {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 15px; color: #fff; font-family: var(--font-sans);
+}
+.si svg { width: 18px; height: 18px; }
+.si.qq { background: #12b7f5; }
+.si.weibo { background: #e6162d; }
+.si.bili { background: #fb7299; color: #fff; font-size: 13px; padding-left: 2px; }
+.si.copy { background: var(--bg-4); color: var(--fg-dim); border: 1px solid var(--line-2); }
+.si.sys { background: var(--bg-4); color: var(--fg-dim); border: 1px solid var(--line-2); }
+.share-url { margin-top: 12px; }
+.share-url input {
+  width: 100%; padding: 8px 10px; font-family: var(--font-mono); font-size: 11.5px;
+  color: var(--fg-dim); background: var(--bg); border: 1px solid var(--line); border-radius: 7px;
+}
+.share-url input:focus { outline: 2px solid var(--brand); outline-offset: 1px; }
+.share-hint { margin-top: 9px; font-size: 11.5px; color: var(--fg-mute); line-height: 1.5; }
+
 /* ---------- Bilibili CTA ---------- */
 .btn--bili { --btn-bd: color-mix(in srgb, #fb7299 45%, var(--line-2)); }
 .btn--bili:hover { --btn-bd: #fb7299; --btn-fg: #ffb3c6; }
