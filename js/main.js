@@ -142,4 +142,53 @@
     }, { rootMargin: '-45% 0px -50% 0px' });
     sections.forEach(function (s) { if (s) spy.observe(s); });
   }
-})();
+
+  /* ---------- 9. 截图大图 ---------- */
+  var lightbox = document.getElementById('lightbox');
+  var zoomTargets = document.querySelectorAll('[data-lightbox]');
+  if (lightbox && zoomTargets.length) {
+    var lbImg = lightbox.querySelector('img');
+    var lastFocus = null;
+
+    var openLightbox = function (src, label) {
+      lastFocus = document.activeElement;
+      lbImg.src = src;
+      if (label) lbImg.alt = label;
+      lightbox.setAttribute('open', '');
+      document.body.style.overflow = 'hidden';
+      lightbox.focus();
+    };
+
+    var closeLightbox = function () {
+      lightbox.removeAttribute('open');
+      lbImg.removeAttribute('src');
+      document.body.style.overflow = '';
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    };
+
+    Array.prototype.forEach.call(zoomTargets, function (el) {
+      var src = el.getAttribute('data-lightbox');
+      var img = el.querySelector('img');
+      var label = img ? img.alt : '';
+      el.addEventListener('click', function () { openLightbox(src, label); });
+      el.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); openLightbox(src, label); }
+      });
+    });
+
+    lightbox.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && lightbox.hasAttribute('open')) closeLightbox();
+    });
+  }
+
+  /* ---------- 10. 优先使用 WebP 版本（file:// 下 <picture><source> 不生效，故用 JS 替换） ---------- */
+  if (/^https?:$/.test(location.protocol)) {
+    Array.prototype.forEach.call(document.querySelectorAll(".shot-img"), function (img) {
+      var webp = img.getAttribute("src").replace(/\.png$/, ".webp");
+      var probe = new Image();
+      probe.onload = function () { img.src = webp; };
+      probe.src = webp;
+    });
+  }
+})( );

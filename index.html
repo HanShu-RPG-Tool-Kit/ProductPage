@@ -52,7 +52,7 @@
         <div class="hero-copy">
           <div class="badge reveal">
             <span class="dot" aria-hidden="true"></span>
-            <b>v0.1</b>
+            <b>v0.1.0</b>
             <span data-l="zh">预览版</span><span data-l="en">Preview</span>
             <span class="tag">NeoForge 26.1.2</span>
           </div>
@@ -66,6 +66,7 @@
           </p>
           <div class="btn-row reveal" data-d="3">
             <a class="btn btn--primary" href="#download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg> <span data-l="zh">开始使用</span><span data-l="en">Get started</span></a>
+            <a class="btn btn--ghost btn--bili" href="https://www.bilibili.com/video/BV14maK67EZQ/" target="_blank" rel="noopener"><span class="bili-ico" aria-hidden="true">▶</span> <span data-l="zh">查看对话演示</span><span data-l="en">Watch the dialogue demo</span></a>
             <a class="btn btn--ghost" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg> <span data-l="zh">查看源码</span><span data-l="en">View source</span></a>
           </div>
           <div class="hero-meta reveal" data-d="3">
@@ -76,49 +77,15 @@
           </div>
         </div>
 
-        <figure class="mock reveal" data-d="2" aria-label="HanShu 编辑器界面示意">
-          <div class="mock-window">
-            <div class="mock-bar">
-              <div class="mock-dots"><i></i><i></i><i></i></div>
-              <div class="mock-url">hanshu://project/rainy-night · <span data-l="zh">剧本编辑器</span><span data-l="en">script editor</span></div>
-            </div>
-            <div class="mock-body">
-              <div class="mock-side">
-                <span class="on"><span data-l="zh">剧本</span><span data-l="en">Script</span></span><span data-l="zh">任务</span><span data-l="en">Quest</span><span data-l="zh">地图</span><span data-l="en">Level</span><span data-l="zh">物品</span><span data-l="en">Item</span><span data-l="zh">礼包</span><span data-l="en">Kit</span><span data-l="zh">商店</span><span data-l="en">Shop</span><span data-l="zh">演员</span><span data-l="en">Actor</span>
-              </div>
-              <div class="mock-code" aria-hidden="true">
-                <div class="code-line"><span class="ln">1</span><span><span class="tok-c">// 新雨夜 · 第 3 幕</span></span></div>
-                <div class="code-line"><span class="ln">2</span><span><span class="tok-k">@角色</span> <span class="tok-id">阿岚</span> <span class="tok-s">"镇口的守夜人"</span></span></div>
-                <div class="code-line"><span class="ln">3</span><span>&nbsp;</span></div>
-                <div class="code-line"><span class="ln">4</span><span><span class="tok-k">阿岚</span>: <span class="tok-s">"这雨……下个不停啊。"</span></span></div>
-                <div class="code-line"><span class="ln">5</span><span><span class="tok-k">等待</span> <span class="tok-id">玩家</span> <span class="tok-k">选择</span> {</span></div>
-                <div class="code-line"><span class="ln">6</span><span>&nbsp;&nbsp;<span class="tok-s">"陪你等"</span> → <span class="tok-id">信任</span> <span class="tok-k">+</span><span class="tok-n">1</span></span></div>
-                <div class="code-line"><span class="ln">7</span><span>&nbsp;&nbsp;<span class="tok-s">"我得走了"</span> → <span class="tok-id">离开</span> <span class="caret"></span></span></div>
-                <div class="code-line"><span class="ln">8</span><span>}</span></div>
-              </div>
-              <div class="mock-tree" aria-hidden="true">
-                <div class="t-h"><span data-l="zh">工程文件</span><span data-l="en">Project</span></div>
-                <div class="t">rainy-night.hs</div>
-                <div class="t">alan.char</div>
-                <div class="t">guard.quest</div>
-                <div class="t">village.level</div>
-                <div class="t">shop.day.item</div>
-                <div class="t">gift.kit</div>
-              </div>
-            </div>
-            <div class="mock-status">
-              <span class="ok">● <span data-l="zh">服务已连接</span><span data-l="en">server connected</span></span>
-              <span>main</span>
-              <span data-l="zh">已保存 · 12:04</span><span data-l="en">Saved · 12:04</span>
-            </div>
+        <figure class="shot reveal" data-d="2">
+          <div class="shot-frame" role="button" tabindex="0" aria-label="查看大图 / View full size" data-lightbox="./assets/screens/01-editor.png">
+            <img class="shot-img" src="./assets/screens/01-editor.png" width="2560" height="1440" fetchpriority="high"
+                 alt="HanShu WebUI 剧本编辑器：左侧为资源管理器（剧本、角色卡、创作资料、assets），中间打开 贝卡芙芙.hs 显示 becafufu 的自白与 @rat_question 节点，底部为备选角色面板" />
           </div>
-          <div class="float-card" aria-hidden="true">
-            <div class="avatars"><i>禾</i><i>M</i><i>J</i></div>
-            <div class="f-label">
-              <b data-l="zh">3 人在线</b><b data-l="en">3 collaborating</b>
-              <span data-l="zh">正在编辑 rainy-night.hs</span><span data-l="en">editing rainy-night.hs</span>
-            </div>
-          </div>
+          <figcaption>
+            <span data-l="zh">剧本编辑器 · <code class="mono">贝卡芙芙.hs</code> · 老鼠与魔女的一段对话</span>
+            <span data-l="en">Script editor · <code class="mono">贝卡芙芙.hs</code> · a rat-and-witch dialogue</span>
+          </figcaption>
         </figure>
       </div>
     </section>
@@ -246,88 +213,16 @@
             </ul>
           </div>
 
-          <div class="panel reveal" data-d="1">
-            <div class="panel-head"><span class="lights"><i></i><i></i><i></i></span>rainy-night.hs</div>
-            <div class="panel-body">
-              <div class="tabs" role="tablist" aria-label="编辑器示例">
-                <button type="button" role="tab" aria-selected="true" data-tab="script" data-tabgroup="demo1"><span data-l="zh">剧本</span><span data-l="en">Script</span></button>
-                <button type="button" role="tab" aria-selected="false" data-tab="quest" data-tabgroup="demo1"><span data-l="zh">任务</span><span data-l="en">Quest</span></button>
-                <button type="button" role="tab" aria-selected="false" data-tab="kit" data-tabgroup="demo1"><span data-l="zh">礼包</span><span data-l="en">Kit</span></button>
-              </div>
-              <div class="tab-panel" data-panel="script" data-tabgroup="demo1">
-<pre class="code"><span class="c">// 镇口 · 守夜人阿岚</span>
-<span class="k">@角色</span> <span class="id">阿岚</span> <span class="s">"镇口的守夜人"</span>
-
-<span class="k">场景</span> <span class="id">镇口</span> {
-  <span class="id">阿岚</span>: <span class="s">"这雨……下个不停啊。"</span>
-  <span class="k">等待</span> <span class="id">玩家</span> {
-    <span class="k">选</span> <span class="s">"陪你等"</span> → <span class="id">信任</span> <span class="k">+</span><span class="n">1</span> → <span class="k">继续</span>
-    <span class="k">选</span> <span class="s">"我得走了"</span> → <span class="k">结束</span>
-  }
-  <span class="id">阿岚</span>: <span class="s">"……谢了。"</span>
-}</pre>
-              </div>
-              <div class="tab-panel" data-panel="quest" data-tabgroup="demo1" hidden>
-<pre class="code"><span class="c"># 任务：镇口的雨</span>
-<span class="k">quest</span> <span class="id">rainy_night</span>
-  <span class="k">title</span>: <span class="s">"镇口的雨"</span>
-  <span class="k">progress</span>:
-    - <span class="id">talk_alan</span>   <span class="c"># 与阿岚对话</span>
-    - <span class="id">find_lamp</span>  <span class="c"># 找回灯笼</span>
-  <span class="k">goal</span>:
-    <span class="k">item</span>.has(<span class="s">"lantern"</span>) <span class="k">&amp;&amp;</span>
-    <span class="id">rep</span>.trust <span class="k">&gt;=</span> <span class="n">10</span></pre>
-              </div>
-              <div class="tab-panel" data-panel="kit" data-tabgroup="demo1" hidden>
-<pre class="code"><span class="c"># 礼包：随人数与难度缩放</span>
-<span class="k">kit</span> <span class="id">boss_reward</span> {
-  <span class="k">hyper</span>: { <span class="k">players</span>: <span class="n">1..4</span>, <span class="k">difficulty</span>: <span class="s">"hard"</span> }
-  <span class="k">expr</span>:  <span class="id">count</span> <span class="k">*</span> <span class="id">players</span> <span class="k">*</span> <span class="k">mod</span>.<span class="id">hard</span>
-  <span class="k">give</span>:  <span class="id">emerald</span> <span class="k">x</span> <span class="id">expr</span>
-}</pre>
-              </div>
+          <figure class="shot shot--inline reveal" data-d="1">
+            <div class="shot-frame" role="button" tabindex="0" aria-label="查看大图 / View full size" data-lightbox="./assets/screens/02-gameplay.png">
+              <img class="shot-img" src="./assets/screens/02-gameplay.png" width="2560" height="1440" loading="lazy" decoding="async"
+                   alt="HanShu WebUI 游戏性工作区：左侧资源管理器列出脚本、任务、演员、声誉与地图模板，中间是「新建多进度任务」的节点图（目标 objective_1、开始进度 start、进度 progress、条件与结局节点），右侧是任务编辑表单，含标题、文档 ID、完成奖励、周期与目标" />
             </div>
-          </div>
-        </div>
-
-        <div class="split reverse">
-          <div class="reveal">
-            <h3><span data-l="zh">写入只有一个入口</span><span data-l="en">One way to write</span></h3>
-            <p>
-              <span data-l="zh">客户端只保存窗口草稿与缓存，不持有工程目录的写句柄；Rust 服务端持有目录，所有修改都经过<strong>主体权限 + 写权 + 版本校验</strong>。多人同时改同一字段时，冲突会被明确拦住，而不是悄悄互相覆盖。</span>
-              <span data-l="en">The client keeps only drafts and caches — never a filesystem write handle. The Rust server owns the directory; every change passes <strong>identity + write lock + version check</strong>. Two people editing the same field get a clear conflict instead of silent overwrites.</span>
-            </p>
-            <ul class="check-list">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><span data-l="zh">不做旁路写入，包括皮肤 IPC 路径</span><span data-l="en">No side-channel writes — including the skin IPC path</span></span></li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><span data-l="zh"><code class="mono">.quest</code> 表单按操作自动提交：文字输入合并，开关与目标增删即时提交</span><span data-l="en"><code class="mono">.quest</code> forms auto-commit per action: typing coalesced, toggles and goal edits immediate</span></span></li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" stroke-width="2.4"/></svg><span><span data-l="zh">撤销 / 重做引用服务端原操作回执，保留他人不相关的修改</span><span data-l="en">Undo/redo reference server receipts, preserving others' unrelated edits</span></span></li>
-            </ul>
-          </div>
-
-          <div class="panel reveal" data-d="1">
-            <div class="panel-head"><span class="lights"><i></i><i></i><i></i></span><span data-l="zh">工程历史 · 协作</span><span data-l="en">Project history · collaborators</span></div>
-            <div class="panel-body">
-              <div class="tabs" role="tablist" aria-label="工程历史示例">
-                <button type="button" role="tab" aria-selected="true" data-tab="hist" data-tabgroup="demo2"><span data-l="zh">历史</span><span data-l="en">History</span></button>
-                <button type="button" role="tab" aria-selected="false" data-tab="members" data-tabgroup="demo2"><span data-l="zh">成员</span><span data-l="en">Members</span></button>
-              </div>
-              <div class="tab-panel" data-panel="hist" data-tabgroup="demo2">
-                <ul class="hist">
-                  <li class="now"><span data-l="zh">阿岚台词 · 第 3 幕改写</span><span data-l="en">Alan dialogue, act 3 rewrite</span><span class="t">12:04</span></li>
-                  <li><span data-l="zh">雨夜任务 · 新增进度节点</span><span data-l="en">Rainy-night quest: new progress node</span><span class="t">11:42</span></li>
-                  <li><span data-l="zh">礼包 boss_reward · 调整缩放</span><span data-l="en">Kit boss_reward: scaling tuned</span><span class="t">11:20</span></li>
-                  <li><span data-l="zh">命名版本 v0.1-preview</span><span data-l="en">Named version v0.1-preview</span><span class="t">10:02</span></li>
-                </ul>
-              </div>
-              <div class="tab-panel" data-panel="members" data-tabgroup="demo2" hidden>
-                <div class="collab-mock">
-                  <div class="collab-row"><span class="av" style="background:#ffb247">禾</span><div class="who"><b>禾穗</b><span><span data-l="zh">本机宿主 · Admin</span><span data-l="en">local host · Admin</span></span></div><span class="perm edit"><span data-l="zh">编辑</span><span data-l="en">Edit</span></span></div>
-                  <div class="collab-row"><span class="av" style="background:#8fd0b0">M</span><div class="who"><b>Mira</b><span>192.168.1.24 · <span data-l="zh">正在编辑剧本</span><span data-l="en">editing script</span></span></div><span class="perm edit"><span data-l="zh">编辑</span><span data-l="en">Edit</span></span></div>
-                  <div class="collab-row"><span class="av" style="background:#c7b6f0">J</span><div class="who"><b>Juno</b><span>192.168.1.31 · <span data-l="zh">只读</span><span data-l="en">read-only</span></span></div><span class="perm view"><span data-l="zh">查看</span><span data-l="en">View</span></span></div>
-                </div>
-              </div>
-            </div>
-          </div>
+            <figcaption>
+              <span data-l="zh">游戏性工作区 · <code class="mono">新建多进度任务.quest</code> · 节点图与表单联动</span>
+              <span data-l="en">Gameplay workspace · <code class="mono">新建多进度任务.quest</code> · node graph and form</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -548,14 +443,16 @@
             <dl class="dl-meta">
               <div><dt>Platform</dt><dd>Windows · macOS · Linux</dd></div>
               <div><dt>Runtime</dt><dd>Tauri 2</dd></div>
-              <div><dt><span data-l="zh">版本</span><span data-l="en">Version</span></dt><dd>v0.1 <span class="muted">preview</span></dd></div>
+              <div><dt><span data-l="zh">版本</span><span data-l="en">Version</span></dt><dd>0.1.0 <span class="muted">preview</span></dd></div>
               <div><dt>License</dt><dd>MIT</dd></div>
+              <div><dt><span data-l="zh">文件</span><span data-l="en">File</span></dt><dd>HanShu_0.1.0_x64_en-US.msi</dd></div>
+              <div><dt><span data-l="zh">大小</span><span data-l="en">Size</span></dt><dd>11.7 MB</dd></div>
             </dl>
             <div class="btn-row">
-              <a class="btn btn--primary" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg> <span data-l="zh">前往 Releases</span><span data-l="en">Go to releases</span></a>
+              <a class="btn btn--primary" href="https://1851484507.cdn.123clouddisk.com/1851484507/hanshu%E5%88%86%E5%8F%91/HanShu_0.1.0_x64_en-US.msi" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg> <span data-l="zh">下载 .msi</span><span data-l="en">Download .msi</span></a>
               <a class="btn btn--ghost" href="https://github.com/HanShu-RPG-Tool-Kit/HanShuWebUI" target="_blank" rel="noopener"><span data-l="zh">源码</span><span data-l="en">Source</span></a>
             </div>
-            <p class="placeholder-note"><strong>&#9432;</strong><span data-l="zh">安装包按平台命名，通常在仓库 Releases 页面发布；尚未上架时可用源码运行。</span><span data-l="en">Builds are per-platform and published on the repo's Releases page; until then you can run from source.</span></p>
+            <p class="placeholder-note"><strong>&#9432;</strong><span data-l="zh">当前提供 Windows x64 安装包；其他平台的构建可自行用源码运行。</span><span data-l="en">Builds are per-platform and published on the repo's Releases page; until then you can run from source.</span></p>
           </article>
 
           <article class="dl-card reveal" data-d="1">
@@ -567,9 +464,11 @@
               <div><dt>NeoForge</dt><dd>26.1.2.109</dd></div>
               <div><dt>Java</dt><dd>25</dd></div>
               <div><dt>License</dt><dd>BUSL 1.1</dd></div>
+              <div><dt><span data-l="zh">文件</span><span data-l="en">File</span></dt><dd>rpgtoolkit-1.0.0.jar</dd></div>
+              <div><dt><span data-l="zh">大小</span><span data-l="en">Size</span></dt><dd>76 MB</dd></div>
             </dl>
             <div class="btn-row">
-              <a class="btn btn--primary" href="https://github.com/HanShu-RPG-Tool-Kit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg> <span data-l="zh">获取模组</span><span data-l="en">Get the mod</span></a>
+              <a class="btn btn--primary" href="https://1851484507.cdn.123clouddisk.com/1851484507/hanshu%E5%88%86%E5%8F%91/rpgtoolkit-1.0.0.jar" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg> <span data-l="zh">下载 .jar</span><span data-l="en">Download .jar</span></a>
             </div>
             <p class="placeholder-note"><strong>&#9432;</strong><span data-l="zh">BUSL 1.1：每个版本发布满两年自动转为 MIT；商业用途受限，详见仓库 LICENSE-POLICY。</span><span data-l="en">BUSL 1.1: each release converts to MIT two years after publication; commercial use is restricted — see LICENSE-POLICY.</span></p>
           </article>
@@ -676,6 +575,11 @@
       </div>
     </div>
   </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" tabindex="-1" aria-label="截图大图">
+    <span class="lb-hint"><span data-l="zh">点击任意处或按 Esc 关闭</span><span data-l="en">Click anywhere or press Esc to close</span></span>
+    <img alt="HanShu WebUI 剧本编辑器（原尺寸）" />
+  </div>
 
   <script src="./js/main.js" defer></script>
 </body>
